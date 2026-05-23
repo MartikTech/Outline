@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Outline</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="logo">Outline</div>
+    <div class="topbar-right">
+      <input type="text" placeholder="Search boards..." class="search">
+      <button id="newBoardBtn">New Board</button>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="hero">
+      <h1>Your ideas,<br>all in one place.</h1>
+      <p>Infinite canvases for diagrams, notes, planning and organized chaos.</p>
+    </section>
+
+    <section class="filters">
+      <button class="filter active">Recent</button>
+      <button class="filter">Favorites</button>
+      <button class="filter">Shared</button>
+      <button class="filter">Archived</button>
+    </section>
+
+  <section>
+
+    <h2 class="section-title">
+      Recent Boards
+    </h2>
+
+    <div class="boards-grid" id="boardsGrid">
+
+      <div class="board-card create-card" id="createBoardCard">
+
+        <div class="plus">
+          +
+        </div>
+
+        <span>Create Board</span>
+      </div>
+
+      <div class="empty-state" id="emptyState">
+        <h3>No boards yet</h3>
+        <p>Create your first board to start organizing ideas.</p>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="create-modal">
+      <h2>Create Board</h2>
+      <p>Give your new board a name.</p>
+      <input type="text" id="boardNameInput" placeholder="Unititled" maxlength="40">
+
+      <div class="modal-actions">
+        <button id="cancelBtn">Cancel</button>
+        <button id="createBtn">Create</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
