@@ -1,62 +1,53 @@
 # Outline
 
-A minimal whiteboard/dashboard app for creating and managing boards. Built with vanilla HTML, CSS, and JavaScript. Uses `localStorage` for persistence.
+A whiteboard website for sketching and drawing on boards. Built using HTML, CSS, and JavaScript. Uses `localStorage` for persistence.
 
 ## What this is
 
-Outline is a simple board manager + entry point for a whiteboard system. It lets users create, rename, delete, and search boards from a dashboard UI.
-
-Each board opens a separate page (`drawing.html`) using a query parameter.
+Outline is a board manager built around a whiteboard system. The dashboard (`dashboard.html`) is an interface for creating, renaming, deleting, searching, and managing boards. Each board opens a separate whiteboard page (`drawing.html`).
 
 ## Tech stack
 
 - HTML
 - CSS
 - JavaScript
-- Local browser storage
-
-
-## Features
-
-### Boards system
-- Create new boards via modal
-- Store boards in `localStorage`
-- Persist across refresh
-
-### Board actions
-- Open board (redirects to `drawing.html?board=<id>`)
-- Rename board (prompt-based)
-- Delete board (prompt-based)
-
-### UI features
-- Grid-based board layout (responsive)
-- Hover effects on cards
-- Empty state when no boards exist
-- Minimal Notion-style UI
-
-### Search
-- Filters boards by title in real time
-
-### Filters UI
-- Recent / Favorites / Shared buttons
-- Currently only UI state (no filtering logic implemented)
+- Localstorage
 
 ## File structure
 
 ```
-/dashboard.html (dashboard)
-
+/dashboard.html
+/drawing.html
 /style.css
-
 /script.js
 ```
 
+## Dashboard features
 
-## How it works
+### Boards system
+- Create new boards
+- Store boards in `localStorage`
+- Persist even when refreshing (because it is saved in localstorage ofc, 2nd line)
 
-- Boards are stored as an array in `localStorage` under: outline_boards
+### Board actions
+- Open board (redirects to `drawing.html?board=<id>`)
+- Rename board
+- Delete board
 
-- Each board object:
+### UI features
+- Responsive grid board layout
+- Simple hover effects on cards
+- Empty state when no boards exist
+- Black and white UI
+
+### Search
+- Real-time searching capabilities
+
+## How the dashboard works
+
+Boards are stored as an array in `localStorage` under `outline_boards`.
+
+Each board object:
 ```js
 {
   id: string,
@@ -65,28 +56,37 @@ Each board opens a separate page (`drawing.html`) using a query parameter.
 }
 ```
 
-When a board is created:
+When a board is created, it is saved to the person's localStorage, the dashboard updates, and it appears in the grid instantly.
 
-* It is saved to localStorage
-* Dashboard re-renders
-* It appears in the grid instantly
+## Drawing page
+
+`drawing.html` is an existing whiteboard engine integrated into this project. It reads the `board` query parameter to load and save per-board state under `outline_v2_<id>` in localStorage. The board name is synced back to the dashboard on change.
+
+### Tools
+Select, Pen, Eraser, Rectangle, Ellipse, Line, Arrow, Text, Sticky Note, Image upload/drag-drop
+
+### Canvas
+- Infinite canvas — scroll to zoom, Space+drag to pan
+- Select, drag, resize, and rotate objects
+- Undo/redo (up to 80 steps)
+- Copy/paste and duplicate
+- Context menu (right-click)
+
+### Export
+PNG, SVG, JSON
+
+### Persistence
+Each board's canvas state saves automatically to localStorage on every change.
 
 ## Known limitations
-* No backend (data is local to the browser)
-* No real timestamps (uses static "Edited just now")
-* Filters (Recent/Favorites/Shared) are UI-only
-* No authentication or multi-device sync
-* drawing.html functionality depends on your implementation
+- No backend — all data is local to the browser
+- No multi-device sync or cloud storage
+- Filters (Recent/Favorites/Shared/Archived) are UI-only on the dashboard
+- No authentication
 
 ## Getting started
+
 1. Clone or download the project
-
-2. Open index.html in a browser
-
+2. Open `dashboard.html` in a browser
 3. Create boards using the "New Board" button
-
-4. Click a board to open drawing.html
-
-## Notes
-
-This is a frontend-only prototype. The dashboard is fully functional, but the actual whiteboard experience depends on the implementation of drawing.html.
+4. Click a board to open the whiteboard
